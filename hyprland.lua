@@ -264,22 +264,22 @@ hl.device({
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
--- Example binds, see https://wiki.hypr.land/configuring/core/binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
---  hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+-- Windows
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal), { description = "Open terminal" })
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close window" })
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }), { description = "Toggle fullscreen" })
+hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" }), { description = "Toggle maximize" })
+hl.bind(mainMod .. " + CTRL + space", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
+hl.bind(mainMod .. " + CTRL + Return", hl.dsp.layout("movetoroot"), { description = "Move window to root" })
+hl.bind(mainMod .. " + N", hl.dsp.window.move({ workspace = "special:magic", follow = false }), { description = "Hide window in scratchpad" })
 
--- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+-- Focus and swapping
+hl.bind(mainMod .. " + J", hl.dsp.window.cycle_next(), { description = "Focus next window" })
+hl.bind(mainMod .. " + K", hl.dsp.window.cycle_next({ next = false }), { description = "Focus previous window" })
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ next = true }), { description = "Swap with next window" })
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ prev = true }), { description = "Swap with previous window" })
+hl.bind(mainMod .. " + H", hl.dsp.layout("splitratio -0.05"), { repeating = true, description = "Decrease split ratio" })
+hl.bind(mainMod .. " + L", hl.dsp.layout("splitratio +0.05"), { repeating = true, description = "Increase split ratio" })
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
